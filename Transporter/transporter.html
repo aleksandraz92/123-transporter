@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>123-Transporter</title>
+</head>
+
+<body>
+   
+    <div class="container">
+       <header>
+            <h1 class="page-header">123<span>Transporter.at</span></h1>
+            <ul class="nav-menu">
+                <a href="index.html"><li>Home</li></a>
+                <a href="#"><li>So einfach geht´s</li></a>
+                <a href="#"><li>Unsere Transporter</li></a>
+                <a href="#"><li>Kontakt</li></a>
+                
+            </ul>
+            
+        </header>
+        
+      <!--  <section class="transporter-angebot">
+            <h2>Unsere Angebot </h2>
+            
+            <div class="transporter-data" >
+                    <input type="text" id="t-name" placeholder="Vehicle Name"  class="transporter-form" readonly>
+                    <input type="text" id="t-plate" placeholder="Vehicle Plate"  class="transporter-form" readonly>
+                    <input type="text" id="t-location" placeholder="Vehicle Location"  class="transporter-form" readonly>
+                    <input type="text" id="t-color" placeholder="Vehicle Color"  class="transporter-form" readonly>
+                    <input type="text" id="t-seats" placeholder="Vehicle Seats"  class="transporter-form" readonly>
+                    
+
+
+                    <button id="button1">Choose your vehicle</button>
+
+                </div>
+                <div id="myData"></div>
+
+        </section>
+    -->
+       <section > 
+        <div class="angebot"> <h2>Unsere Angebot </h2></div>
+            <div id="myData">
+                   
+                </div>
+       </section> 
+    
+        <footer>
+            <p>&copy; 123-Transporter. 2021</p>
+        </footer>
+    </div>
+    
+    
+    <script>
+            var url = "https://api.stag.123-transporter.at/truck";
+            var bearer = 'Bearer ' + 'mk5BL745JXQmaWpd';
+             fetch(url, {
+             method: 'GET',
+             headers: {
+                 'Authorization': bearer,
+                 'Content-Type': 'application/json'
+             }}).then(function (response) {
+                     return response.json();
+                 })
+                 .then(function (data) {
+                     appendData(data);
+                 })
+                 .catch(function (err) {
+                     console.log('error: ' + err);
+                 });
+             function appendData(data) {
+                 var mainContainer = document.getElementById("myData");
+                 for (var i = 0; i < data.length; i++) {
+                     var div = document.createElement("div");
+                     div.innerHTML = '<b>NAME:</b> ' + data[i].name + '<br>' + '<b>COLOR:</b>' + data[i].color + '<br>' + '<b>PLATE:</b> ' + data[i].plate  + '<br>' + '<b>LOCATION:</b> ' + data[i].location + '<br> ' + '<b>SEATS:</b> ' + data[i].seats;
+                     mainContainer.appendChild(div);
+                 }
+             }
+         </script>
+</body>
+
+</html>
